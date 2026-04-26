@@ -1,0 +1,106 @@
+<?php
+echo("hi")
+
+$students = array(
+    array("name" => "أحمد محمود", "grade" => 95, "age" => 20),
+    array("name" => "سارة خالد", "grade" => 82, "age" => 21),
+    array("name" => "محمد علي", "grade" => 74, "age" => 19),
+    array("name" => "نور إبراهيم", "grade" => 65, "age" => 20),
+    array("name" => "ليلى حسن", "grade" => 45, "age" => 22)
+);
+
+// إنشاء دالة باسم calculateStatus($grade) تعمل على إيجاد الحالة وإرجاعها بناءً على درجة الطالب
+function calculateStatus($grade) {
+    if ($grade >= 90) {
+        return "ممتاز";
+    } elseif ($grade >= 80) {
+        return "جيد جدا";
+    } elseif ($grade >= 70) {
+        return "جيد";
+    } elseif ($grade >= 60) {
+        return "مقبول";
+    } else {
+        return "راسب";
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>جدول بيانات الطلاب</title>
+    <style>
+        body { font-family: Arial; margin: 20px; background: #f5f5f5; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 20px; border-radius: 10px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        th { background: #4CAF50; color: white; }
+        .stats { background: #f0f0f0; padding: 15px; border-radius: 5px; }
+        .stats p { margin: 8px 0; }
+        h2 { text-align: center; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>بيانات الطلاب</h2>
+
+    <?php
+    // استدعاء المصفوفة والدالة من الجزء الأول
+    $students = array(
+        array("name" => "أحمد محمود", "grade" => 95, "age" => 20),
+        array("name" => "سارة خالد", "grade" => 82, "age" => 21),
+        array("name" => "محمد علي", "grade" => 74, "age" => 19),
+        array("name" => "نور إبراهيم", "grade" => 65, "age" => 20),
+        array("name" => "ليلى حسن", "grade" => 45, "age" => 22)
+    );
+
+    function calculateStatus($grade) {
+        if ($grade >= 90) return "ممتاز";
+        elseif ($grade >= 80) return "جيد جدا";
+        elseif ($grade >= 70) return "جيد";
+        elseif ($grade >= 60) return "مقبول";
+        else return "راسب";
+    }
+
+    // حساب الإحصائيات
+    $grades = array_column($students, 'grade');
+    $maxGrade = max($grades);
+    $minGrade = min($grades);
+    $averageGrade = array_sum($grades) / count($grades);
+    
+    $successCount = 0;
+    foreach ($students as $student) {
+        if ($student['grade'] >= 60) $successCount++;
+    }
+    ?>
+
+    <!-- عرض الجدول -->
+    <table>
+        <tr>
+            <th>اسم الطالب</th>
+            <th>الدرجة</th>
+            <th>العمر</th>
+            <th>الحالة</th>
+        </tr>
+        <?php foreach ($students as $student): ?>
+        <tr>
+            <td><?php echo $student['name']; ?></td>
+            <td><?php echo $student['grade']; ?></td>
+            <td><?php echo $student['age']; ?></td>
+            <td><?php echo calculateStatus($student['grade']); ?></td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+
+    <!-- عرض الإحصائيات -->
+    <div class="stats">
+        <h3>الإحصائيات</h3>
+        <p><strong>أعلى درجة:</strong> <?php echo $maxGrade; ?></p>
+        <p><strong>أقل درجة:</strong> <?php echo $minGrade; ?></p>
+        <p><strong>معدل الدرجات:</strong> <?php echo round($averageGrade, 2); ?></p>
+        <p><strong>عدد الطلاب الناجحين:</strong> <?php echo $successCount; ?></p>
+    </div>
+</div>
+</body>
+</html>
