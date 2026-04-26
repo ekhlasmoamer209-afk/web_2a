@@ -9,7 +9,7 @@ $students = array(
     array("name" => "ليلى حسن", "grade" => 45, "age" => 22)
 );
 
-// إنشاء دالة باسم calculateStatus($grade) تعمل على إيجاد الحالة وإرجاعها بناءً على درجة الطالب
+calculateStatus($grade)  
 function calculateStatus($grade) {
     if ($grade >= 90) {
         return "ممتاز";
@@ -46,7 +46,7 @@ function calculateStatus($grade) {
     <h2>بيانات الطلاب</h2>
 
     <?php
-    // استدعاء المصفوفة والدالة من الجزء الأول
+  
     $students = array(
         array("name" => "أحمد محمود", "grade" => 95, "age" => 20),
         array("name" => "سارة خالد", "grade" => 82, "age" => 21),
@@ -63,7 +63,7 @@ function calculateStatus($grade) {
         else return "راسب";
     }
 
-    // حساب الإحصائيات
+    
     $grades = array_column($students, 'grade');
     $maxGrade = max($grades);
     $minGrade = min($grades);
@@ -75,7 +75,7 @@ function calculateStatus($grade) {
     }
     ?>
 
-    <!-- عرض الجدول -->
+  
     <table>
         <tr>
             <th>اسم الطالب</th>
@@ -93,7 +93,6 @@ function calculateStatus($grade) {
         <?php endforeach; ?>
     </table>
 
-    <!-- عرض الإحصائيات -->
     <div class="stats">
         <h3>الإحصائيات</h3>
         <p><strong>أعلى درجة:</strong> <?php echo $maxGrade; ?></p>
